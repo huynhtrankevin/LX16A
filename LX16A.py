@@ -184,8 +184,10 @@ class LX16A:
   #Definir l'angle minimum et maximum du servo
   # Angle  est entre 0 et 1000 Resolution de 0.24 degree
   def setAngleLimit(self,id,angleMin,angleMax):
+     amin = math.ceil(angleMin*1000/240)
+     amax = math.ceil(angleMax*1000/240)
      packet = struct.pack("<BBBHH",id,7,
-                          self.SERVO_ANGLE_LIMIT_WRITE,angleMin,angleMax)
+                          self.SERVO_ANGLE_LIMIT_WRITE,amin,amax)
      self.sendPacket(packet)
 
   #Lire la limite minimum et maximum de l'angle permise
